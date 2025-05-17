@@ -7,6 +7,19 @@
     <h1>hello traveller</h1>
     <p>you're allowed to browse here</p>
 
+    {% for post in posts %}
+  <article>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content[:250] }}{% if post.content|length > 250 %}...{% endif %}</p>
+    <p><em>Posted on {{ post.date_posted.strftime('%Y-%m-%d') }}</em></p>
+    <p>Tags: {{ post.hashtags }}</p>
+    <hr>
+  </article>
+
+{% else %}
+  <p><em>No posts yet. Check back later!</em></p>
+{% endfor %}
+
     <p><a href="{{ url_for("about") }}">meet-and-greet, a.k.a 'about me'</a> </p>
 
 </body>
