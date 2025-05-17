@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p><em>{{ post.date_posted.strftime('%B %d, %Y')  }}</em></p>
+    <div>
+        {{  post.content | safe}}
+    </div>
+    {% if post.hashtags %}
+        <p><strong>tags:</strong> {{  post.hashtags  }}</p>
+    {% endif %}
+    <p><a href="{{ url_for('home') }}">back to home</a></p>
+</body>
+</html>

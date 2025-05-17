@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>create a new tale</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li style="color: green;">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <h1>create a new tale</h1>
+    <form method="POST">
+        <p>
+            <label for="password">password:</label><br>
+            <input type="password" id="password" name="password" required>
+        </p>
+
+        <p>
+            <label for="title">title:</label><br>
+            <input type="text" id="title" name="title" required>
+        </p>
+
+        <p>
+            <laber for="content">content:</laber><br>
+            <textarea id="content" name="content" rows="12" required></textarea>
+        </p>
+
+        <p>
+            <label for="hashtags">hashtags (comma-separated):</label><br>
+            <input type="text" id="hashtags" name="hashtags">
+        </p>
+
+        <p><button type="submit">commit & push</button></p>
+    </form>
+
+    <p><a href="{{  url_for('home')  }}">back to home</a></p>
+</body>
+</html>
