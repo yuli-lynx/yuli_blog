@@ -3,13 +3,29 @@
 
 {% block body %}
 <body>
-    <h1>{{ post.title }}</h1>
-    <p><em>{{ post.date_posted.strftime('%B %d, %Y')  }}</em></p>
-    <div>
-        {{  post.content | safe}}
-    </div>
-    {% if post.hashtags %}
-        <p><strong>tags:</strong> {{  post.hashtags  }}</p>
-    {% endif %}
-    <p><a href="{{ url_for('home') }}">back to home</a></p>
+    <div style="max-width: 800px; margin: 0 auto">
+        <div>
+            <h1>{{ post.title }}</h1>
+            <p><em>{{ post.date_posted.strftime('%B %d, %Y')  }}</em></p>
+
+                <div>
+                    {{  post.content.replace('\n', '<br>') | safe}}
+                </div>
+                {% if post.hashtags %}
+                    <p><strong>tags:</strong> {{  post.hashtags  }}</p>
+                {% endif %}
+                {% if post.image_filename %}
+                    {% set image_path = 'uploads/' + post.image_filename %}
+                    <img src="{{ url_for('static', filename=image_path) }}"
+                    alt="Image"
+                    class="img-fluid mb-4">
+                {% endif %}
+            
+            <div class="mt-4">
+            <a href="{{ url_for('edit_post', post_id=post.id) }}"
+                class="btn btn-secondary">edit</a><br>
+                
+            </div>
+            <p><a href="{{ url_for('home') }}">back to home</a></p>
+        </div>
 {% endblock %}

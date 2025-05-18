@@ -2,3 +2,43 @@ body {
   padding: 1.5rem;  /* 24px top/bottom and left/right */
   margin: 0;        /* remove default body margin */
 }
+
+/* 1. Center and constrain the form container */
+.form-container {
+  max-width: 600px;         /* limit width so it’s not full-screen */
+  margin: 2rem auto;        /* vertical space (2rem), center horizontally */
+  padding: 1.5rem;          /* inner spacing around the form */
+  border: 1px solid #ccc;   /* light grey border for definition */
+  border-radius: 0.5rem;    /* rounded corners */
+  background-color: #fff;   /* white background to pop from page */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow */
+}
+
+/* 2. Style form fields: make inputs/full width */
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container textarea,
+.form-container input[type="file"] {
+  width: 100%;              /* span the container’s full width */
+  padding: 0.5rem;          /* breathing room inside the field */
+  margin-bottom: 1rem;      /* space between fields */
+  border: 1px solid #aaa;   /* subtle border */
+  border-radius: 0.25rem;   /* slightly rounded corners */
+  font-size: 1rem;          /* readable text size */
+  box-sizing: border-box;   /* include padding in width */
+}
+
+/* 3. Style buttons inside this container */
+.form-container .btn-large,
+.form-container .btn-danger {
+  width: 100%;              /* full width buttons for emphasis */
+  font-size: 1.1rem;        /* slightly larger text */
+  padding: 0.75rem;         /* comfortable click/tap area */
+  margin-bottom: 0.75rem;   /* separation between buttons */
+}
+
+/* 4. Separate delete form visually */
+.delete-form {
+  border-top: 1px solid #eee; /* light separator line above */
+  padding-top: 1rem;          /* space above delete section */
+}

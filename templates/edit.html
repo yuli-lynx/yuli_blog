@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}edit: {{ post.title }}{% endblock %}
+
+{% block body %}
+<div class="form-container">
+<h1>edit the tale</h1>
+
+<form method="POST" enctype="multipart/form-data">
+  <p>
+    <label for="password">password:</label><br>
+    <input type="password" id="password" name="password" required>
+  </p>
+
+  <p>
+    <label for="title">title:</label><br>
+    <input type="text" id="title" name="title"
+           value="{{ post.title }}" required>
+  </p>
+
+  <p>
+    <label for="content">content:</label><br>
+    <textarea id="content" name="content"
+              rows="6" required>{{ post.content }}</textarea>
+  </p>
+
+  <p>
+    <label for="hashtags">hashtags:</label><br>
+    <input type="text" id="hashtags" name="hashtags"
+           value="{{ post.hashtags }}">
+  </p>
+
+  <p>
+    <label for="image">replace image (optional):</label><br>
+    <input type="file" id="image" name="image" accept="image/*">
+  </p>
+
+  <button type="submit" class="btn-large">Save this all</button>
+</form>
+
+<form action="{{ url_for('delete_post', post_id=post.id) }}"
+      method="POST"
+      onsubmit="return confirm('Are you sure you want to delete this post?');">
+  
+  <p>
+    <label for="del-password"></label><br>
+    <input type="password"
+           id="del-password"
+           name="password"
+           required>
+  </p>
+
+  <button type="submit" class="btn btn-danger">Delete this all</button>
+</form>
+
+
+<p><a href="{{ url_for('post', post_id=post.id) }}">← cancel</a></p>
+</div>
+{% endblock %}

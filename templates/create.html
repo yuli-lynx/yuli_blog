@@ -2,7 +2,7 @@
 {% block title %}create a new tale{% endblock %}
 
 {% block body %}
-    {% with messages = get_flashed_messages() %}
+    {% with messages=get_flashed_messages() %}
         {% if messages %}
             <ul>
             {% for message in messages %}
@@ -13,7 +13,7 @@
     {% endwith %}
 
     <h1>create a new tale</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <p>
             <label for="password">password:</label><br>
             <input type="password" id="password" name="password" required>
@@ -27,6 +27,10 @@
         <p>
             <laber for="content">content:</laber><br>
             <textarea id="content" name="content" rows="12" required></textarea>
+        </p>
+
+        <p>
+            <input type="file" name="image" accept="image*">
         </p>
 
         <p>
