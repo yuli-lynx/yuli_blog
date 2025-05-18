@@ -1,0 +1,4 @@
+body {
+  padding: 1.5rem;  /* 24px top/bottom and left/right */
+  margin: 0;        /* remove default body margin */
+}

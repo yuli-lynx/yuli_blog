@@ -46,6 +46,10 @@ def create_post():
     
     return render_template("create.html")
 
+@app.route("/test-base")
+def test_base():
+    return render_template("test_base.html")
+
 class BlogPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)

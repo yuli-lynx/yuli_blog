@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ post.title }}</title>
-</head>
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
 <body>
     <h1>{{ post.title }}</h1>
     <p><em>{{ post.date_posted.strftime('%B %d, %Y')  }}</em></p>
@@ -13,5 +12,4 @@
         <p><strong>tags:</strong> {{  post.hashtags  }}</p>
     {% endif %}
     <p><a href="{{ url_for('home') }}">back to home</a></p>
-</body>
-</html>
+{% endblock %}
