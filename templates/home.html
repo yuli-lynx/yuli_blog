@@ -6,13 +6,33 @@
     <h1>hello traveller</h1>
     <p>you're allowed to browse here</p>
 
+    {% if active_tag %}
+      <p>
+        showing posts tagged "<strong>{{ active_tag }}</strong>"
+        - <a href="{{ url_for('home') }}">clear filter</a>
+      </p>
+    {% endif %}
+
     {% for post in posts %}
       <article>
         <h2><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
         <p>{{ post.content[:250] }}{% if post.content|length > 250 %}...{% endif %}</p>
         <p><a href="{{ url_for('post', post_id=post.id) }}">read more</a></p>
         <p><em>posted on {{ post.date_posted.strftime('%Y-%m-%d') }}</em></p>
-        <p>tags: {{ post.hashtags }}</p>
+        
+        {% if post.hashtags %}
+          <p>tags:
+            {% for tag in post.hashtags.split(',') %}
+              {% set tag = tag.strip() %}
+              <a
+              href="{{ url_for('home', tag=tag) }}"
+              {% if tag == active_tag %}style="font-weight:bold"{% endif %}
+              >{{ tag }}</a>
+              {% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </p>
+        {% endif %}
+
         <hr>
       </article>
 

@@ -4,8 +4,16 @@ import datetime
 import os
 from PIL import Image
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__, instance_relative_config=True)
+
+app.secret_key = os.environ["SECRET_KEY"]
+
+if "SECRET_KEY" not in os.environ:
+    raise RuntimeError("SECRET_KEY environment variable is not set")
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['UPLOAD_FOLDER'] = os.path.join(
     os.path.abspath(os.path.dirname(__file__)),
@@ -38,8 +46,19 @@ def delete_image_file(filename):
 
 @app.route("/")
 def home():
-    posts = BlogPost.query.order_by(BlogPost.date_posted.desc()).all()
-    return render_template("home.html", posts=posts)
+    tag = request.args.get("tag")
+
+    if tag:
+        posts = (
+            BlogPost.query
+            .filter(BlogPost.hashtags.contains(tag))
+            .order_by(BlogPost.date_posted.desc())
+            .all()
+        )
+    else:
+        posts = BlogPost.query.order_by(BlogPost.date_posted.desc()).all()
+    
+    return render_template("home.html", posts=posts, active_tag=tag)
 
 @app.route("/about")
 def about():
